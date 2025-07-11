@@ -20,7 +20,7 @@
         overflow: hidden;
       }
     </style>
-    <script src="/sdk/sdk.1.9.10.js"></script>
+    <script src="/trading-pro-sdk-example/sdk/sdk.1.9.10.js"></script>
   </head>
   <body>
     <div id="app"></div>
@@ -31,7 +31,9 @@
       FuturesSDK.createTradeUI({
         container: document.getElementById("app"),
         config: {
-          staticBaseUrl: `/static/`,
+          staticBaseUrl: isDev
+            ? "/static/"
+            : `/trading-pro-sdk-example/static/`,
           futuresWsHost: "wss://fstream.asterdex.com/compress",
           apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configure this, it's default as Asterdex's url
           headerConfig: {
