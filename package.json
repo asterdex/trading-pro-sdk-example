@@ -1,0 +1,14 @@
+{
+  "name": "trading-pro-sdk-example",
+  "private": true,
+  "scripts": {
+    "dev": "ws --spa --port 3000"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "local-web-server": "^5.4.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

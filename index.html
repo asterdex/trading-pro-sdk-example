@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>My Futures Exchange</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #app {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+    <script src="/sdk/sdk.1.9.10.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const { origin, protocol } = window.location;
+      const isDev = protocol === "http:";
+
+      FuturesSDK.createTradeUI({
+        container: document.getElementById("app"),
+        config: {
+          staticBaseUrl: `/static/`,
+          futuresWsHost: "wss://fstream.asterdex.com/compress",
+          apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configure this, it's default as Asterdex's url
+          headerConfig: {
+            logo: {
+              darkImgUrl: "/static/static/images/aden.svg",
+              lightImgUrl: "/static/static/images/aden.svg",
+              navTo: "https://aden.io",
+            },
+          },
+          darkPalette: {
+            modalBg: "#000000",
+            popupBg: "#000000",
+            inputBg: "rgb(49 45 38)",
+            overallBg: "rgb(49 45 38)",
+            moduleBg: "#000000",
+            bg1: "rgb(255 255 255 / 0.2)",
+            bg2: "rgb(255 255 255)",
+
+            badgeYellowBg: "rgb(224 148 41 / 0.5)",
+
+            primaryHover: "#e09429e6",
+            primary: "rgb(224 148 41)",
+
+            t: {
+              primary: "rgb(255 255 255)",
+              white: "rgb(0 0 0)",
+              secondary: "rgb(255 255 255)",
+              third: "rgb(129 136 152)",
+              disabled: "rgb(100 110 125)",
+              yellow: "rgb(250 214 162)",
+              emphasize: "rgb(224 148 41)",
+            },
+            slider: {
+              // disabledBar: "",
+              progressBar: "rgb(224 148 41)",
+              radioButtonBorderColor: "rgb(224 148 41)",
+              // tooltipText: "",
+              // tooltipBg: "",
+              // radioButtonBg: "",
+              stepperBg: "rgb(255 255 255)",
+              stepperBorderColor: "",
+            },
+          },
+          lightPalette: {
+            primaryHover: "#e09429e6",
+            primary: "rgb(224, 148, 41)",
+            sellHover: "#FD5CB7",
+            sell: "#EF3E9E",
+            buyHover: "#3CC6BE",
+            buy: "#1DB1A8",
+            slider: {
+              // line: "rgb(224, 148, 41)",
+              // disabledBar: "",
+              progressBar: "rgb(224 148 41)",
+              // tooltipText: "",
+              // tooltipBg: "",
+              // radioButtonBg: "",
+              radioButtonBorderColor: "rgb(224 148 41)",
+              // stepperBg: "",
+              // stepperBorderColor: "",
+            },
+          },
+          defaultTheme: "dark",
+        },
+        state: {
+          symbol: "BTCUSDT",
+          lng: "en",
+        },
+      });
+    </script>
+  </body>
+</html>
