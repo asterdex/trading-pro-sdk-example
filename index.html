@@ -31,6 +31,10 @@
       FuturesSDK.createTradeUI({
         container: document.getElementById("app"),
         config: {
+          fontFamily: "Pretendard",
+          fontUrl: isDev
+            ? "/static/static/font/PretendardVariable.ttf"
+            : "/trading-pro-sdk-example/static/static/font/PretendardVariable.ttf",
           staticBaseUrl: isDev
             ? "/static/"
             : `/trading-pro-sdk-example/static/`,
