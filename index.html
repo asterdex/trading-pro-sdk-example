@@ -20,7 +20,7 @@
         overflow: hidden;
       }
     </style>
-    <script src="/trading-pro-sdk-example/sdk/sdk.1.9.10.js"></script>
+
     <link
       rel="icon"
       type="image/x-icon"
@@ -33,89 +33,138 @@
       const { origin, protocol } = window.location;
       const isDev = protocol === "http:";
 
-      FuturesSDK.createTradeUI({
-        container: document.getElementById("app"),
-        config: {
-          // fontFamily: '"Pretendard", system-ui, sans-serif',
-          fontUrl: isDev
-            ? "/static/static/font/PretendardVariable.ttf"
-            : "/trading-pro-sdk-example/static/static/font/PretendardVariable.ttf",
-          staticBaseUrl: isDev
-            ? "/static/"
-            : `/trading-pro-sdk-example/static/`,
-          futuresWsHost: "wss://fstream.asterdex.com/compress",
-          apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configure this, it's default as Asterdex's url
-          headerConfig: {
-            logo: {
-              darkImgUrl: isDev
-                ? "/static/static/images/aden.svg"
-                : "/trading-pro-sdk-example/static/static/images/aden.svg",
-              darkImgUrl: isDev
-                ? "/static/static/images/aden.svg"
-                : "/trading-pro-sdk-example/static/static/images/aden.svg",
-              navTo: "https://aden.io",
-            },
-          },
-          darkPalette: {
-            modalBg: "#000000",
-            popupBg: "#000000",
-            inputBg: "rgb(49 45 38)",
-            overallBg: "rgb(49 45 38)",
-            moduleBg: "#000000",
-            bg1: "rgb(255 255 255 / 0.2)",
-            bg2: "rgb(255 255 255)",
+      const scriptTag = document.createElement("script");
+      scriptTag.src = isDev
+        ? "/sdk/sdk.1.9.10.js"
+        : "/trading-pro-sdk-example/sdk/sdk.1.9.10.js";
 
-            badgeYellowBg: "rgb(224 148 41 / 0.5)",
+      document.head.appendChild(scriptTag);
 
-            primaryHover: "#e09429e6",
-            primary: "rgb(224 148 41)",
+      scriptTag.onload = () => {
+        FuturesSDK.createTradeUI({
+          container: document.getElementById("app"),
+          config: {
+            enableThemeToggle: false,
+            // fontFamily: '"Pretendard", system-ui, sans-serif',
+            fontUrl: isDev
+              ? "/static/static/font/PretendardVariable.ttf"
+              : "/trading-pro-sdk-example/static/static/font/PretendardVariable.ttf",
+            staticBaseUrl: isDev
+              ? "/static/"
+              : `/trading-pro-sdk-example/static/`,
+            futuresWsHost: "wss://fstream.asterdex.com/compress",
+            apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configure this, it's default as Asterdex's url
+            headerConfig: {
+              logo: {
+                darkImgUrl: isDev
+                  ? "/static/static/images/aden.svg"
+                  : "/trading-pro-sdk-example/static/static/images/aden.svg",
+                darkImgUrl: isDev
+                  ? "/static/static/images/aden.svg"
+                  : "/trading-pro-sdk-example/static/static/images/aden.svg",
+                navTo: "https://aden.io",
+              },
+            },
+            darkPalette: {
+              modalBg: "#16171A",
+              popupBg: "#16171A",
+              inputBg: "#26282C",
+              overallBg: "#000000",
+              moduleBg: "#101014",
+              bg1: "#414347",
+              bg2: "#ffffff", // button text color
+              bg3: "rgb(255 255 255 / 0.1)", // hover background color for some interactive elements
+              bg4: "#16171A",
+              line: "#26282C",
+              badgeYellowBg: "#413625",
 
-            t: {
-              primary: "rgb(255 255 255)",
-              white: "rgb(0 0 0)",
-              secondary: "rgb(255 255 255)",
-              third: "rgb(129 136 152)",
-              disabled: "rgb(100 110 125)",
-              yellow: "rgb(250 214 162)",
-              emphasize: "rgb(224 148 41)",
+              primaryHover: "rgba(247, 167, 0, 0.8)",
+              primary: "rgba(247, 167, 0, 1)",
+              buy: "#21B26C",
+              sell: "#EF454A",
+
+              t: {
+                primary: "rgb(255 255 255)",
+                white: "rgb(255 255 255)",
+                secondary: "rgb(255 255 255)",
+                third: "rgb(129 136 152)",
+                disabled: "rgb(100 110 125)",
+                yellow: "#f7a700",
+                emphasize: "rgb(224 148 41)",
+                buy: "#21B26C",
+                sell: "#EF454A",
+              },
+              slider: {
+                // disabledBar: "",
+                progressBar: "#f7a700",
+                radioButtonBorderColor: "rgb(224 148 41)",
+                // tooltipText: "",
+                // tooltipBg: "",
+                // radioButtonBg: "red",
+                stepperBg: "#000",
+                stepperBorderColor: "#414347",
+              },
+              button: {
+                secondaryBg: "red",
+              },
             },
-            slider: {
-              // disabledBar: "",
-              progressBar: "rgb(224 148 41)",
-              radioButtonBorderColor: "rgb(224 148 41)",
-              // tooltipText: "",
-              // tooltipBg: "",
-              // radioButtonBg: "",
-              stepperBg: "rgb(255 255 255)",
-              stepperBorderColor: "",
+            lightPalette: {
+              primaryHover: "#e09429e6",
+              primary: "rgb(224, 148, 41)",
+              sellHover: "#FD5CB7",
+              sell: "#EF3E9E",
+              buyHover: "#3CC6BE",
+              buy: "#1DB1A8",
+              slider: {
+                // line: "rgb(224, 148, 41)",
+                // disabledBar: "",
+                progressBar: "rgb(224 148 41)",
+                // tooltipText: "",
+                // tooltipBg: "",
+                // radioButtonBg: "",
+                radioButtonBorderColor: "rgb(224 148 41)",
+                // stepperBg: "",
+                // stepperBorderColor: "",
+              },
             },
+            defaultTheme: "dark",
           },
-          lightPalette: {
-            primaryHover: "#e09429e6",
-            primary: "rgb(224, 148, 41)",
-            sellHover: "#FD5CB7",
-            sell: "#EF3E9E",
-            buyHover: "#3CC6BE",
-            buy: "#1DB1A8",
-            slider: {
-              // line: "rgb(224, 148, 41)",
-              // disabledBar: "",
-              progressBar: "rgb(224 148 41)",
-              // tooltipText: "",
-              // tooltipBg: "",
-              // radioButtonBg: "",
-              radioButtonBorderColor: "rgb(224 148 41)",
-              // stepperBg: "",
-              // stepperBorderColor: "",
-            },
+          state: {
+            symbol: "BTCUSDT",
+            lng: "en",
           },
-          defaultTheme: "dark",
-        },
-        state: {
-          symbol: "BTCUSDT",
-          lng: "en",
-        },
-      });
+        });
+
+        const style = document.getElementById("iframe-custom-style");
+        FuturesSDK.eventListener.on("loaded", () => {
+          const iframe = document.getElementsByTagName("iframe")[0];
+
+          const style = iframe.contentWindow.document.createElement("style");
+          style.id = "iframe-custom-style";
+          style.innerHTML = `
+            .css-nfja6e {
+              color: #ffffff;
+            }
+
+            .bn-slider-radio-button {
+              border-radius: 100% !important;
+            }
+
+            .bn-slider-radio-button:after {
+              content: none !important;
+            }
+
+            .bn-slider-stepper {
+              border-radius: 100% !important;
+            }
+
+            .bn-slider-progress-bar {
+              background-color: #f7a700 !important;
+            }
+          `;
+          iframe.contentWindow.document.head.appendChild(style);
+        });
+      };
     </script>
   </body>
 </html>
