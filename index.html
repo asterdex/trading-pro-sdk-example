@@ -44,6 +44,11 @@
         FuturesSDK.createTradeUI({
           container: document.getElementById("app"),
           config: {
+            features: {
+              referral: {
+                enabled: false,
+              },
+            },
             enableThemeToggle: false,
             supportNetworks: ["bnb", "eth", "arb"],
             // fontFamily: '"Pretendard", system-ui, sans-serif',
@@ -84,7 +89,7 @@
               buy: "#21B26C",
               sell: "#EF454A",
               sellHover: "#FF2B31",
-              buyHover: "#29E68B",
+              buyHover: "#04C669",
 
               t: {
                 primary: "rgb(255 255 255)",
