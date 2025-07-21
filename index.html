@@ -44,6 +44,11 @@
         FuturesSDK.createTradeUI({
           container: document.getElementById("app"),
           config: {
+            liteConfig: {
+              walletLogoUrl: isDev
+                ? "/static/static/images/aden.svg"
+                : "/trading-pro-sdk-example/static/static/images/aden.svg",
+            },
             features: {
               referral: {
                 enabled: false,
