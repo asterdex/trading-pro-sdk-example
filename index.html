@@ -44,6 +44,25 @@
         return localStorage.getItem("lng") || "en";
       }
 
+      const menu = {
+        en: {
+          data: [
+            { text: "NFT", navTo: "https://bugsnft.com" },
+            { text: "Leaderboard", navTo: "https://bgscleaderboard.com/" },
+            { text: "Vault", navTo: "https://bgscvault.com/" },
+          ],
+          placement: "left",
+        },
+        ko: {
+          data: [
+            { text: "NFT", navTo: "https://bugsnft.com" },
+            { text: "Leaderboard", navTo: "https://bgscleaderboard.com/" },
+            { text: "Vault", navTo: "https://bgscvault.com/" },
+          ],
+          placement: "left",
+        },
+      };
+
       scriptTag.onload = () => {
         FuturesSDK.createTradeUI({
           container: document.getElementById("app"),
@@ -70,6 +89,7 @@
             futuresWsHost: "wss://fstream5.asterdex.com/compress",
             apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configure this, it's default as Asterdex's url
             headerConfig: {
+              menu: menu[getLngFromLocalStorage()] ?? menu.en,
               logo: {
                 darkImgUrl: isDev
                   ? "/static/static/images/adenlogowithtext.svg"
@@ -153,6 +173,7 @@
 
         FuturesSDK.eventListener.on("lngChange", (data) => {
           localStorage.setItem("lng", data.lng);
+          window.location.reload();
         });
 
         FuturesSDK.eventListener.on("loaded", () => {
